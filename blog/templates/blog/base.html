@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% if title %}
+    <title>My Blog - {{title}} </title>
+    {% else %}
+    <title>My Blog</title>
+    {% endif %} {% static "" as baseUrl %}
+    <link rel="stylesheet" type="text/css" href="{{baseUrl}}blog/css/{{css}}">
+</head>
+
+<body>
+    <a href="{% url 'blog-home' %}">Home</a>
+    <a href="{% url 'blog-about' %}">About</a> {% block content %}{% endblock%}
+</body>
+
+</html>
