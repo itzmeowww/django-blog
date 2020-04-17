@@ -1,24 +1,27 @@
 {% extends 'blog/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+    <div class="move"></div>
+    <div class="postDetail">
     <div>
         <div>
-        <img style="width:100px;height:100px"src="{{user.profile.image.url}}">
+        <img class = "profileImg" src="{{user.profile.image.url}}">
         <h2>{{user.username}}</h2>
         <h2>{{user.email}}</h2>
         </div>
     </div>
-
-    <form method = "POST" enctype="multipart/form-data">
+    
+    <form class = "profile" method = "POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <fieldset class="form-group">
-            <legend>Profile Info</legend>
+        
+        
             {{ u_form|crispy}}
             {{ p_form|crispy}}
-        </fieldset>
+        
         <div class="form-group">
-         <button type="submit">Update</button>
+         <button class="btn2-small"type="submit">Update</button>
         </div>
     </form>
+    </div>
 
 {% endblock content %}

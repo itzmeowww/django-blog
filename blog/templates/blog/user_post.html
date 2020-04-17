@@ -1,37 +1,48 @@
 {% extends "blog/base.html" %} 
 {% block content %}
 <div class="postLists">
-    <h1>Post by {{view.kwargs.username}} ({{page_obj.paginator.count}})</h1>
+    <h1 class = "author" >Post by {{view.kwargs.username}} ({{page_obj.paginator.count}})</h1>
 
     {% for post in posts%}
     <div class="post">
-        <h1><a href="{% url 'post-detail' post.id %}">{{ post.title }}<a></h1>
-        <p>By {{post.author}} on {{post.date_posted}}</p>
-        <p>{{post.content}}</p>
+        <img class = "authorImg"src="{{post.author.profile.image.url}}">
+        <div class = "postInfo">
+            <div class = "infoTop">
+                <a class = "userLink"href="{% url 'user-posts' post.author.username %}">{{post.author}}</a>{{post.date_posted}}
+            </div>
+            <hr>
+            <div class="infoBot">
+            <a class="postTitle"href="{% url 'post-detail' post.pk %}">{{ post.title }}<a>
+        
+            <p class="postContent">{{post.content}}</p>
+            </div>
+        </div>
     </div>
     {% endfor%} 
 
+    <div class="pages">
     {% if is_paginated %}
         {% if page_obj.has_previous %}
-            <a href="?page=1">First</a>
-            <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+            <a class = "pagesBtn" href="?page=1">First</a>
+            <a class = "pagesBtn" href="?page={{page_obj.previous_page_number}}">Previous</a>
         {% endif %}
 
         {% for num in page_obj.paginator.page_range %}
-            {% if page_obg.number == num %}
-                <a href="?page={{num}}" style="color:black;text-decoration:none;">{{num}}</a>
+            {% if page_obj.number == num %}
+                <a class = "pagesBtn pagesBtnCurrent" href="?page={{num}}" style="color:black;text-decoration:none;">{{num}}</a>
             {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3'%}
-                <a href="?page={{num}}" style="color:black;text-decoration:none;">{{num}}</a>
+                <a class = "pagesBtn" href="?page={{num}}" style="color:black;text-decoration:none;">{{num}}</a>
             {% endif %}
             
         {% endfor %}
         {% if page_obj.has_next %}
             
-            <a href="?page={{page_obj.next_page_number}}">Next</a>
-            <a href="?{{page_obj.paginator.num_pages}}">Last</a>
+            <a class = "pagesBtn" href="?page={{page_obj.next_page_number}}">Next</a>
+            <a class = "pagesBtn" href="?page={{page_obj.paginator.num_pages}}">Last</a>
         {% endif %}
 
     {% endif %}
+    </div>
 </div>
 
 {% endblock content%} 

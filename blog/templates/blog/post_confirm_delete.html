@@ -1,15 +1,14 @@
 {% extends "blog/base.html" %}
 {% block content %}
-    <div class="content-section">
+    <div class="move"></div>
+    <div class="postDetail">
         <form method = "POST">
             {% csrf_token %}
-            <fieldset class="form-group">
-                <legend>Delete Post</legend>
-                <h1>Delete : {{object.title}}</h1>
-            </fieldset>
+                <h1>  Delete : {{object.title}}</h1>
+                </br>
             <div class="form-group">
-                <button type="submit">Delete</button>
-                <a href="{% url 'post-detail' object.pk %}">Cancel</a>
+                <button class="btn2 red-btn" type="submit">Delete</button>
+                <button class="btn2" href="{% url 'post-detail' object.pk %}">Cancel</button>
             </div>
         </form>
         

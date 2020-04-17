@@ -1,17 +1,28 @@
 {% extends "blog/base.html" %} 
 {% block content %}
-
-    
-    <div class="post">
-        <h1>{{ object.author }}</h1>
-        <h1>{{ object.title }}</h1>
-        <p>By <a href="{% url 'user-posts' object.author.username %}">{{object.author}}</a> on {{object.date_posted|date:"F d, Y"}}</p>
-        <p>{{object.content}}</p>
+    <div class="move"></div>
+    <div class="postDetail">
+        <img class = "postDetailImg"src="{{object.author.profile.image.url}}">
+        <div class = "postDetailInfo">
+            <div class = "infoTop">
+                by&nbsp<a class = "userLink"href="{% url 'user-posts' object.author.username %}">{{object.author}}</a>on {{object.date_posted|date:"F d, Y"}}
+            </div>
+            <hr>
+            <div class="infoBot">
+            <a class="postTitle"href="{% url 'post-detail' object.pk %}">{{ object.title }}<a>
+        
+            <p class="postContent">{{object.content}}</p>
+            </div>
+        </div>
     </div>
+    
     {% if user == object.author %}
-    <a href="{% url 'post-update' object.pk %}">Update</a>
+    <div class="btns">
+    <a class = "btn" href="{% url 'post-update' object.pk %}">Update</a>
+    <a class = "btn" href="{% url 'post-delete' object.pk %}">Delete</a>
+    </div>
     {% endif %}
-    <a href="{% url 'post-delete' object.pk %}">Delete</a>
+    
 
 
 {% endblock content%} 

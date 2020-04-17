@@ -2,16 +2,17 @@
 
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
+    <div class="move"></div>
+    <div class="postDetail">
         <form method = "POST">
             {% csrf_token %}
-            <fieldset class="form-group">
-                <legend>Blog Post</legend>
+            
+            
                 {{ form|crispy}} 
-            </fieldset>
+            
             <div class="form-group">
-                <button type="submit">Post</button>
-                <a href="{% url 'post-detail' object.pk %}">Cancel</a>
+                <button class = "btn2" type="submit">Post</button>
+                <button class = "btn2" href="{% url 'blog-home' %}">Cancel</button>
             </div>
         </form>
         
